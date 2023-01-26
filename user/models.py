@@ -29,11 +29,11 @@ class UserModel(BaseModel, models.Model):
     
     email = models.CharField(max_length=255, null=True, unique=True,
                              verbose_name="邮箱")
-    level = models.IntegerField(default=1,verbose_name="等级")
-    balance = models.DecimalField(max_digits=5, decimal_places=2,verbose_name="余额")  
-    consumption = models.DecimalField(max_digits=5, decimal_places=2,verbose_name="消费")
-    recharge = models.DecimalField(max_digits=5, decimal_places=2,verbose_name="充值")
-    token = models.CharField(max_length=225)
+    level = models.IntegerField(null=True,default=1,verbose_name="等级")
+    balance = models.DecimalField(null=True,max_digits=5, decimal_places=2,verbose_name="余额")  
+    consumption = models.DecimalField(null=True,max_digits=5, decimal_places=2,verbose_name="消费")
+    recharge = models.DecimalField(null=True,max_digits=5, decimal_places=2,verbose_name="充值")
+    token = models.CharField(max_length=300,null=True,unique=True,verbose_name="token")
 
     # 创建表名
     class Meta():

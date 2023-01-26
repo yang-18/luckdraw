@@ -11,5 +11,6 @@ urlpatterns = [
     # url(r'^Register$', views.Register),  # 注册
     # url(r'^login$', views.login),  # 登陆
     path('register/',views.Register),
+    path('login/',views.Login),
 
 ]

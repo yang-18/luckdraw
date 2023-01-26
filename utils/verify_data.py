@@ -5,9 +5,11 @@ import pytz
 
 
 def validate_telephone(tel):
+    # print(tel)
     if tel is not None:
-        ret = re.match(r"^1[35678]\d{9}$", tel)
-        if ret:
+        telephone = re.match(r"^1[35678]\d{9}$", tel)
+        if telephone: 
+            print(telephone)
             return True
         else:
             False

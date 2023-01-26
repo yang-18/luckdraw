@@ -7,7 +7,7 @@
 # import socket
 # import uuid
 # from logging import handlers, Logger
-# from measure.models import Logs
+# # from measure.models import Logs
 # import datetime
 # logging.basicConfig(level=logging.DEBUG)
 

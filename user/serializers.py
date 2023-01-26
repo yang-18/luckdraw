@@ -11,9 +11,8 @@ class UserSerializers(serializers.Serializer):
     # 手机号
     telephone = serializers.CharField(max_length=11)
     # 昵称
-    username = serializers.CharField(max_length=50)
-    # 地址
-    # location = serializers.CharField(max_length=300)
+    name = serializers.CharField(max_length=50)
+  
     # 邮箱
     # email = serializers.CharField(max_length=255)
 

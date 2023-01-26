@@ -23,7 +23,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     #        名     到什么地方去   views中的index
     # path('user/',include("user.urls")),
-    path('userapp/', include('user.urls')),
+    path('user/', include('user.urls')),
     
 
 ]
