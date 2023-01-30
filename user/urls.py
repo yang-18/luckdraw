@@ -8,9 +8,9 @@ admin.site.site_title = '管理后台'
 admin.site.site_header = '后台管理'
 
 urlpatterns = [
-    # url(r'^Register$', views.Register),  # 注册
-    # url(r'^login$', views.login),  # 登陆
-    path('register/',views.Register),
-    path('login/',views.Login),
+
+    path('register/',views.register),   # 注册
+    path('login/',views.login),         # 登陆
+    path('personal_center/',views.personal_center),
 
 ]

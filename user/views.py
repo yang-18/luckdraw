@@ -5,15 +5,18 @@ import re
 import json
 from utils.verify_data import validate_password, validate_email, validate_telephone, validate_name, get_effective_session
 from utils.response_code import RET, error_map
+from utils.verify_token import verify_token,get_user_id
 from .models import UserModel
 from django.contrib.auth.hashers import make_password, check_password
 from .serializers import UserSerializers
 import jwt
 from luckdraw.settings import SECRET_KEY
+from django.core.mail import send_mail
 # from utils.logging import Logger
 
+
 # 注册
-def Register(request):
+def register(request):
         if request.method == "POST":
             telephone = request.GET.get('telephone')
             password = request.GET.get('password')
@@ -43,7 +46,7 @@ def Register(request):
 
 
 # 登录方法
-def Login(request):
+def login(request):
     if request.method == "POST":
         json_str = request.body
         json_dict = json.loads(json_str)
@@ -92,8 +95,56 @@ def Login(request):
                                 'data': {'message': '密码错误，请重新输入密码',
                                          'token': 'None'}})
 
+# 个人中心
+def personal_center(request):
+    if request.method == "GET":
+        # print(request)
+        value = verify_token(request)
+        print(value)
+        if value is None:
+            return JsonResponse({'code': RET.NOTOKEN,'data': {'message': 'toekn令牌过期或错误'}})
+        user_id = get_user_id(request=request)
+        measuring = UserModel.objects.filter(id=user_id).first()
+        if measuring is None:
+            return JsonResponse({
+                'code': 200,
+                'data': {
+                    'message': '用户不存在', }
+            })
+
+        serializers = UserSerializers(measuring)
+        return JsonResponse({
+            'code': 200,
+            'data': {
+                'message': '成功',
+                'user_data': [serializers.data]}
+        })
 
 
 
+#  邮箱找回密码
+def send_email(self,request):
+    email = request.data.get('email')
+    print(email)
+    try:
+        send_mail(subject="实验楼找回密码", message="点击链接修改密码",from_email="2754615732@qq.com",
+                    recipient_list=[email],
+                    html_message='请点击超链接<a href="http://127.0.0.1:8080/set_password?email={}">点击链接修改密码</a>'.format(email))
+        return JsonResponse({'msg': '验证码已发送,请及时查收','code':200}, status=200)
+    except:
+        return JsonResponse({'msg':'验证码发送失败'})
+
+
+# 修改密码
+def change_password(self,request):
+    email = request.data.get('email')
+    password = request.data.get('password')
+    password2 = request.data.get('password2')
+
+    if password == password2:
+        UserModel.objects.filter(email=email).update(password=password)
+        return JsonResponse({'msg':'密码修改成功','code':200})
+    else:
+        return JsonResponse({'msg':'密码修改失败'},status=502)
 
 
