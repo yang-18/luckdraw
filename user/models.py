@@ -1,7 +1,6 @@
 from django.db import models
 from datetime import date
-
-
+from django.contrib.auth.models import AbstractUser
 
 class BaseModel(models.Model):
     create_time = models.DateTimeField(auto_now_add=True, verbose_name="创建时间")
@@ -48,7 +47,7 @@ class UserModel(BaseModel, models.Model):
 
 
 # 管理员(admintable)
-class AdmintableModel(BaseModel, models.Model):
+class AdmintableModel(AbstractUser,BaseModel,):
     # id 主键
     id = models.AutoField(primary_key=True, verbose_name="ID")
     name= models.CharField(max_length=50, null=True, unique=True,
@@ -58,7 +57,7 @@ class AdmintableModel(BaseModel, models.Model):
                 max_length=22, unique=True, verbose_name="手机号码")
     email = models.CharField(max_length=255, null=True, unique=True,
                             verbose_name="邮箱")
-    level = models.IntegerField(default=1,verbose_name="等级")
+    level = models.IntegerField(null=True,default=1,verbose_name="等级")
 
     # 创建表名
     class Meta():

@@ -25,12 +25,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'luckdraw'
 JWT_ALGORITHM = 'HS256'
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 MEDIA_ROOT = 'uploads/'
 
-# Application definition
+# 指定static地址
+STATIC_ROOT = "D:\学习资料\luck_draw\luckdraw\luckdraw\static"
+AUTH_USER_MODEL = 'user.AdmintableModel'
 
 INSTALLED_APPS = [
     'django.contrib.admin',
