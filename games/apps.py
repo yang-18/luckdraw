@@ -1,7 +1,7 @@
 from django.apps import AppConfig
 
 
-class UserConfig(AppConfig):
+class GamesConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'user'
-    verbose_name = '用户管理'
+    name = 'games'
+    verbose_name = '游戏资产管理'

@@ -12,11 +12,11 @@ class UserSerializers(serializers.Serializer):
     telephone = serializers.CharField(max_length=11)
     # 昵称
     name = serializers.CharField(max_length=50)
-  
+
     # 邮箱
     # email = serializers.CharField(max_length=255)
 
     class Meta:
         model = UserModel
         fields = ('id', 'telephone', 'name',
-                   )
+                  )
