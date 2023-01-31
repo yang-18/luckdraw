@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
-
+import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -31,10 +31,11 @@ ALLOWED_HOSTS = ['*']
 MEDIA_ROOT = 'uploads/'
 
 # 指定static地址
-STATIC_ROOT = "D:\学习资料\luck_draw\luckdraw\luckdraw\static"
+# STATIC_ROOT = "D:\学习资料\luck_draw\luckdraw\luckdraw\static"
 AUTH_USER_MODEL = 'user.AdmintableModel'
 
 INSTALLED_APPS = [
+    'simpleui',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -43,7 +44,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # 'rest_framework'
     "luckdraw",
-    'user'
+    'user',
+    'games'
 ]
 
 MIDDLEWARE = [
@@ -88,7 +90,6 @@ WSGI_APPLICATION = 'luckdraw.wsgi.application'
 # }
 
 
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -110,8 +111,6 @@ DATABASES = {
 #         'PORT': '5436',
 #     }
 # }
-
-
 
 
 # Password validation
@@ -156,3 +155,50 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# -------- simpleui设置 -------
+# 自定义simpleui 菜单
+
+
+# # 指定static地址
+# STATIC_ROOT = os.path.join(BASE_DIR, "static")
+
+
+# # 首页配置
+# SIMPLEUI_HOME_PAGE = '首页路由'
+# 首页标题
+# SIMPLEUI_HOME_TITLE = '百度一下你就知道'
+# 首页图标,支持element-ui的图标和fontawesome的图标
+# SIMPLEUI_HOME_ICON = 'el-icon-date'
+
+# # 设置simpleui 点击首页图标跳转的地址
+# SIMPLEUI_INDEX = 'https://www.88cto.com'
+
+# 首页显示服务器、python、django、simpleui相关信息
+SIMPLEUI_HOME_INFO = False
+
+# # 首页显示快速操作
+# # SIMPLEUI_HOME_QUICK = False
+
+# 更改默认语言为中文
+LANGUAGE_CODE = 'zh-hans'
+
+# # 自定义SIMPLEUI的Logo
+SIMPLEUI_LOGO = 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Ftm-image.tianyancha.com%2Ftm%2F2e938c0b671cc8708c63bcf6ae0e365c.jpg&refer=http%3A%2F%2Ftm-image.tianyancha.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1651041540&t=ba680d3f60b830c491b24b03d8b70be2'
+
+# 设置simpleui 点击首页图标跳转的地址
+SIMPLEUI_INDEX = 'http://127.0.0.1:8000/admin/'
+
+# 登录页粒子动画，默认开启，False关闭
+# SIMPLEUI_LOGIN_PARTICLES = False
+
+# 让simpleui 不要收集相关信息
+SIMPLEUI_ANALYSIS = True
+
+# 是否显示默认图标，默认=True
+SIMPLEUI_DEFAULT_ICON = False
+
+# 指定simpleui 是否以脱机模式加载静态资源，为True的时候将默认从本地读取所有资源，即使没有联网一样可以。适合内网项目
+# 不填该项或者为False的时候，默认从第三方的cdn获取
+SIMPLEUI_STATIC_OFFLINE = True
